@@ -7,10 +7,10 @@ Webservice do aplicativo para reconhecimento de genomas a partir de uma imagem
 
 Dependências
 
-  Octave
+  Octave:
     ?
     
-  Python
+  Python:
     scipy
     numpy
     oct2py
