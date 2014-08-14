@@ -68,7 +68,7 @@ def app_input():
                             'server_time' : strftime("%Y-%m-%d %H:%M:%S", gmtime())})             
             return json
 
-    json = jsonify({'success' : 'false',
+    json = jsonify({'success' : 'false'',
                     'server_time' : strftime("%Y-%m-%d %H:%M:%S", gmtime())})           
     return json
 
