@@ -26,5 +26,9 @@ white = sum(image(idx));
 black = line_points - white;
 
 %calcula nota
+mret = black;
 
-mret = -black;
+if (y1 > sizeImg(1) || y1 < 0 || y2 > sizeImg(1) || y2 < 0)
+  mret += 5000000;
+endif
+

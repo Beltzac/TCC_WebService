@@ -5,5 +5,5 @@ if (all(img == 0))
   res = ones(64);  
 else
   img = mat2gray(img);
-  res = imresize(img ,[64 64], 'nearest');
+  res = imresize(img ,[64 64], 'nearest'); 
 endif
