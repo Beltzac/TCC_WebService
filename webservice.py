@@ -1,24 +1,23 @@
 #!flask/bin/python
 import os
-from oct2py import octave
 from flask import Flask, jsonify, request, redirect, url_for, send_from_directory
 from werkzeug.utils import secure_filename
 from time import gmtime, strftime
 from Bio.Blast import NCBIWWW
 from Bio.Blast import NCBIXML
-import Image
 import pytesseract
+import Image
 import string
 
 
 THIS_FOLDER = os.getcwd()
-octave.addpath(THIS_FOLDER + '/octave')
 UPLOAD_FOLDER = THIS_FOLDER + '/upload'
 OUTPUT_FOLDER = THIS_FOLDER + '/output'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
 
 
 def blastn(sequencia):
@@ -29,22 +28,21 @@ def blastn(sequencia):
     for alinhamento in registro_blast.alignments:
         #print alinhamento.hsps
         for hsp in alinhamento.hsps:
-            if hsp.expect < 0.01:
-                # print "****Alinhamento****"
-                reg = {
-                    'nome': alinhamento.hit_def,
-                    'id': alinhamento.hit_id,
-                    'tamanho': alinhamento.length,
-                    'e-value': hsp.expect,
-                    'query-a': hsp.query[:50],
-                    'query-b': hsp.match[:50],
-                    'query-c': hsp.sbjct[:50]
-                }
-                lista.append(reg)
-                #print reg
-                # print "----------------------------------------------"
+            # print "****Alinhamento****"
+            reg = {
+                'nome': alinhamento.hit_def,
+                'id': alinhamento.hit_id,
+                'tamanho': alinhamento.length,
+                'e-value': hsp.expect,
+                'query-a': hsp.query[:50],
+                'query-b': hsp.match[:50],
+                'query-c': hsp.sbjct[:50]
+            }
+            lista.append(reg)
+            #print reg
+            # print "----------------------------------------------"
 
-    return lista
+    return lista[:10]
 
 
 def allowed_file(filename):
@@ -66,6 +64,7 @@ def send_output(filename):
 def site_input():
     erro = 100
     texto = ''
+    temp = []
     tempo = 0
     if request.method == 'POST':
         file = request.files['file']
@@ -73,14 +72,19 @@ def site_input():
             filename = secure_filename(file.filename)
             full_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             file.save(full_path)
-            texto = pytesseract.image_to_string(Image.open(full_path))
+            imagemDNA = Image.open(full_path);
+
+            texto = pytesseract.image_to_string(imagemDNA,config='-psm 3')
+            print(texto)
+            print ('-' * 30)
             all = string.maketrans('','')
             strdna = all.translate(all,'acgtACGT')
             texto2 = texto.translate(all,strdna).upper()
-            print texto2
+            print (texto2)
             # texto , tempo = octave.runOCR(full_path)
             #texto = 'ATGGAAAACTTTTGGCAGGCCTGCTCTCAAAAACTTGAGCAGGAGCTGACACCCCAGCAATACAGCGCCTGGATCAAGCCCCTGGTGCCGCTCGACTACGAAGACGGGCTGCTGCGCGTGGCCGCGCCCAATCGGTTCAAGCTGGACTGGGTCAAGACCCAGTTCGCCAACCGCATCACCGCGCTGGCCTGCGAGTACTGGGACGCGCCCACCGAGGTGCAATTCGTGCTCGACCCGCGTGGCAACCAGGGCCGTCGTCCGGCGGCGGCCGCCGCGGCCGGCAATGGCGCCAGCGGTCTGGGTTTGCCCAATCACGAGCAATTGCACCTGGACCCCGAACCGGCCCAGCCGGTGCGCGCGGTCGCGCCGCGCCAGGAGCAGTCGCGTATCAACCCGGTGTTGACCTTCGACAATCTGGTGACGGGTAAGGCCAACCAGCTTGCCCGCGCAGCCGCCACCCAGGTGGCCAACAACCCCGGCACGTCCTACAACCCGCTGTTCCTGTACGGCGGCGTCGGCCTGGGTAAGACCCACATCATCCACGCCATCGGCAACCAGGTGCTTGTGGATAACCCGGGCGCGAAAATCCGCTACATCCACGCCG'
-            temp = blastn(texto2)
+            if len(texto2) > 0:
+                temp = blastn(texto2)
             erro = 0
         else:
             erro = 1
@@ -109,12 +113,8 @@ def app_input():
             filename = secure_filename(file.filename)
             full_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             file.save(full_path)
-            texto, tempo = octave.runOCR(full_path, 1)
-            json = jsonify({'ocr_text': texto.tolist(),
-                            'ocr_time': tempo,
-                            'success': 'true',
-                            'server_time': strftime("%Y-%m-%d %H:%M:%S", gmtime())})
-            return json
+
+            return " "
 
     json = jsonify({'success': 'false',
                     'server_time': strftime("%Y-%m-%d %H:%M:%S", gmtime())})
