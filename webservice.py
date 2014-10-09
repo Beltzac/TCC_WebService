@@ -4,7 +4,11 @@ from oct2py import octave
 from flask import Flask, jsonify, request, redirect, url_for, send_from_directory
 from werkzeug.utils import secure_filename
 from time import gmtime, strftime
-
+from Bio.Blast import NCBIWWW
+from Bio.Blast import NCBIXML
+import Image
+import pytesseract
+import string
 
 
 THIS_FOLDER = os.getcwd()
@@ -17,6 +21,32 @@ app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 
+def blastn(sequencia):
+    lista = []
+    resultado = NCBIWWW.qblast('blastn', 'nr', sequencia)
+    registros = NCBIXML.parse(resultado)
+    registro_blast = registros.next()
+    for alinhamento in registro_blast.alignments:
+        #print alinhamento.hsps
+        for hsp in alinhamento.hsps:
+            if hsp.expect < 0.01:
+                # print "****Alinhamento****"
+                reg = {
+                    'nome': alinhamento.hit_def,
+                    'id': alinhamento.hit_id,
+                    'tamanho': alinhamento.length,
+                    'e-value': hsp.expect,
+                    'query-a': hsp.query[:50],
+                    'query-b': hsp.match[:50],
+                    'query-c': hsp.sbjct[:50]
+                }
+                lista.append(reg)
+                #print reg
+                # print "----------------------------------------------"
+
+    return lista
+
+
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
@@ -26,6 +56,7 @@ def allowed_file(filename):
 def send_upload(filename):
     return send_from_directory(UPLOAD_FOLDER, filename)
 
+
 @app.route('/output/<path:filename>')
 def send_output(filename):
     return send_from_directory(OUTPUT_FOLDER, filename)
@@ -33,16 +64,32 @@ def send_output(filename):
 
 @app.route('/web/', methods=['GET', 'POST'])
 def site_input():
+    erro = 100
+    texto = ''
+    tempo = 0
     if request.method == 'POST':
         file = request.files['file']
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             full_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             file.save(full_path)
-            texto , tempo = octave.runOCR(full_path)
-            json = jsonify({'text' : texto.tolist(),
-                            'time' : tempo})             
-            return json #redirect(url_for('uploaded_file', filename=filename))
+            texto = pytesseract.image_to_string(Image.open(full_path))
+            all = string.maketrans('','')
+            strdna = all.translate(all,'acgtACGT')
+            texto2 = texto.translate(all,strdna).upper()
+            print texto2
+            # texto , tempo = octave.runOCR(full_path)
+            #texto = 'ATGGAAAACTTTTGGCAGGCCTGCTCTCAAAAACTTGAGCAGGAGCTGACACCCCAGCAATACAGCGCCTGGATCAAGCCCCTGGTGCCGCTCGACTACGAAGACGGGCTGCTGCGCGTGGCCGCGCCCAATCGGTTCAAGCTGGACTGGGTCAAGACCCAGTTCGCCAACCGCATCACCGCGCTGGCCTGCGAGTACTGGGACGCGCCCACCGAGGTGCAATTCGTGCTCGACCCGCGTGGCAACCAGGGCCGTCGTCCGGCGGCGGCCGCCGCGGCCGGCAATGGCGCCAGCGGTCTGGGTTTGCCCAATCACGAGCAATTGCACCTGGACCCCGAACCGGCCCAGCCGGTGCGCGCGGTCGCGCCGCGCCAGGAGCAGTCGCGTATCAACCCGGTGTTGACCTTCGACAATCTGGTGACGGGTAAGGCCAACCAGCTTGCCCGCGCAGCCGCCACCCAGGTGGCCAACAACCCCGGCACGTCCTACAACCCGCTGTTCCTGTACGGCGGCGTCGGCCTGGGTAAGACCCACATCATCCACGCCATCGGCAACCAGGTGCTTGTGGATAACCCGGGCGCGAAAATCCGCTACATCCACGCCG'
+            temp = blastn(texto2)
+            erro = 0
+        else:
+            erro = 1
+
+        json = jsonify({'text': texto2,
+                        'blast': temp,
+                        'erro': erro,
+                        'time': tempo})
+        return json  # redirect(url_for('uploaded_file', filename=filename))
     return '''
     <!doctype html>
     <title>Upload nova imagem</title>
@@ -53,6 +100,7 @@ def site_input():
     </form>
     '''
 
+
 @app.route('/', methods=['GET', 'POST'])
 def app_input():
     if request.method == 'POST':
@@ -61,17 +109,19 @@ def app_input():
             filename = secure_filename(file.filename)
             full_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             file.save(full_path)
-            texto , tempo = octave.runOCR(full_path)
-            json = jsonify({'ocr_text' : texto.tolist(),
-                            'ocr_time' : tempo,
-                            'success' : 'true',
-                            'server_time' : strftime("%Y-%m-%d %H:%M:%S", gmtime())})             
+            texto, tempo = octave.runOCR(full_path, 1)
+            json = jsonify({'ocr_text': texto.tolist(),
+                            'ocr_time': tempo,
+                            'success': 'true',
+                            'server_time': strftime("%Y-%m-%d %H:%M:%S", gmtime())})
             return json
 
-    json = jsonify({'success' : 'false',
-                    'server_time' : strftime("%Y-%m-%d %H:%M:%S", gmtime())})           
+    json = jsonify({'success': 'false',
+                    'server_time': strftime("%Y-%m-%d %H:%M:%S", gmtime())})
     return json
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
 	
+
