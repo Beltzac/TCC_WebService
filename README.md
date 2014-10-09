@@ -14,3 +14,4 @@ Dependências
     scipy
     numpy
     oct2py
+    biopython
