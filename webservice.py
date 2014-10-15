@@ -199,6 +199,21 @@ def image_input():
 
                 file.save(full_path(hash))
                 print('saving image:', hash)
+
+                r = Result.query.filter_by(hash=hash).first()
+
+                if r is not None:
+                    if r.error == 1:
+                        error = 1  # a imagem ja esta sendo processada, espere um pouco
+                        json = jsonify({'id': hash, 'error': error})
+                        return json
+                    else:
+                        # deleta registro antigo e reprocessa
+                        db.session.delete(r)
+                        db.session.commit()
+
+
+
                 r = Result(hash, "", 1)  # erro pra processamento em andamento
                 db.session.add(r)
                 db.session.commit()
@@ -217,6 +232,7 @@ def image_input():
     json = jsonify({'id': hash,
                     'error': error
     })
+
     return json
 
 
@@ -276,7 +292,7 @@ def image_result(image_id):
 
 
 #accesso aos graficos
-@app.route('/debug/<int:image_id>')
+@app.route('/debug/<image_id>')
 def debug_images(image_id):
     return image_id
 

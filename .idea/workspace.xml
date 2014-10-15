@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="14302fad-cd83-431d-8ed5-b92319fd780d" name="Default" comment="requisiçao e consulta, quase la">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/exemplo_json_consulta" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/exemplo_json_requisicao" />
+    <list default="true" id="14302fad-cd83-431d-8ed5-b92319fd780d" name="Default" comment="exemplos">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/results.db" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webservice.py" afterPath="$PROJECT_DIR$/webservice.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="TCC_WebService-master.iws" />
@@ -50,8 +50,8 @@
       <file leaf-file-name="webservice.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/webservice.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.22094926" vertical-offset="2730" max-vertical-offset="4695">
-              <caret line="173" column="52" selection-start-line="173" selection-start-column="7" selection-end-line="173" selection-end-column="53" />
+            <state vertical-scroll-proportion="0.47954175" vertical-offset="4162" max-vertical-offset="4950">
+              <caret line="297" column="19" selection-start-line="297" selection-start-column="19" selection-end-line="297" selection-end-column="19" />
               <folding>
                 <element signature="e#19#28#0" expanded="true" />
               </folding>
@@ -389,7 +389,11 @@
       <created>1413415425416</created>
       <updated>1413415425416</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="exemplos">
+      <created>1413415515398</created>
+      <updated>1413415515398</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -436,7 +440,8 @@
     <MESSAGE value="nova dependencia" />
     <MESSAGE value="Melhorando os graficos" />
     <MESSAGE value="requisiçao e consulta, quase la" />
-    <option name="LAST_COMMIT_MESSAGE" value="requisiçao e consulta, quase la" />
+    <MESSAGE value="exemplos" />
+    <option name="LAST_COMMIT_MESSAGE" value="exemplos" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -682,8 +687,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/webservice.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.22094926" vertical-offset="2730" max-vertical-offset="4695">
-          <caret line="173" column="52" selection-start-line="173" selection-start-column="7" selection-end-line="173" selection-end-column="53" />
+        <state vertical-scroll-proportion="0.47954175" vertical-offset="4162" max-vertical-offset="4950">
+          <caret line="297" column="19" selection-start-line="297" selection-start-column="19" selection-end-line="297" selection-end-column="19" />
           <folding>
             <element signature="e#19#28#0" expanded="true" />
           </folding>
