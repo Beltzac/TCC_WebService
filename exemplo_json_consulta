@@ -1,0 +1,148 @@
+{
+  "blast": [
+    {
+      "hits": [
+        {
+          "e-value": 1.61575e-07, 
+          "query-a": "CGCGAAAATCCGCTACATCCACGCCGAGCAATACGTACG", 
+          "query-b": "|||||||||||||||||||||||||||||||||||| ||", 
+          "query-c": "CGCGAAAATCCGCTACATCCACGCCGAGCAATACGTGCG"
+        }, 
+        {
+          "e-value": 0.00355892, 
+          "query-a": "CGGCGTCGGCCTGG-TAAGACCCACATCAT-CACGCC", 
+          "query-b": "|||||||||||||| ||||||||||||||| ||||||", 
+          "query-c": "CGGCGTCGGCCTGGGTAAGACCCACATCATCCACGCC"
+        }, 
+        {
+          "e-value": 0.52819, 
+          "query-a": "CGCCAG-AGCAGTCGCGTATCAACC----TTTGACCTTCGAC", 
+          "query-b": "|||||| ||||||||||||||||||     ||||||||||||", 
+          "query-c": "CGCCAGGAGCAGTCGCGTATCAACCCGGTGTTGACCTTCGAC"
+        }
+      ], 
+      "id": "gi|300072131|gb|CP002039.1|", 
+      "nome": "Herbaspirillum seropedicae SmR1, complete genome", 
+      "tamanho": 5513887
+    }, 
+    {
+      "hits": [
+        {
+          "e-value": 8.36978e-05, 
+          "query-a": "CGCGAAAATCCGCTACATCCACGCCGAGCAATACGT", 
+          "query-b": "||||  ||||||||||||||||||||||||||||||", 
+          "query-c": "CGCGCGAATCCGCTACATCCACGCCGAGCAATACGT"
+        }
+      ], 
+      "id": "gi|339305108|gb|CP001503.2|", 
+      "nome": "Burkholderia glumae BGR1 chromosome 1, complete sequence", 
+      "tamanho": 3906507
+    }, 
+    {
+      "hits": [
+        {
+          "e-value": 8.36978e-05, 
+          "query-a": "CGCGAAAATCCGCTACATCCACGCCGAGCAATACGT", 
+          "query-b": "||||  ||||||||||||||||||||||||||||||", 
+          "query-c": "CGCGCGAATCCGCTACATCCACGCCGAGCAATACGT"
+        }
+      ], 
+      "id": "gi|327367349|gb|CP002599.1|", 
+      "nome": "Burkholderia gladioli BSR3 chromosome 1, complete sequence", 
+      "tamanho": 4413616
+    }, 
+    {
+      "hits": [
+        {
+          "e-value": 0.000292134, 
+          "query-a": "AATCCGCTACATCCACGCCGAGCAATACGT", 
+          "query-b": "||||||||||||||||||||||||||||||", 
+          "query-c": "AATCCGCTACATCCACGCCGAGCAATACGT"
+        }
+      ], 
+      "id": "gi|402246008|gb|CP003774.1|", 
+      "nome": "Burkholderia cepacia GG4 chromosome 1, complete sequence", 
+      "tamanho": 3463655
+    }, 
+    {
+      "hits": [
+        {
+          "e-value": 0.00101965, 
+          "query-a": "ATCCGCTACATCCACGCCGAGCAATACGT", 
+          "query-b": "|||||||||||||||||||||||||||||", 
+          "query-c": "ATCCGCTACATCCACGCCGAGCAATACGT"
+        }
+      ], 
+      "id": "gi|685659702|gb|CP007787.1|", 
+      "nome": "Burkholderia cepacia strain DDS 7H-2 chromosome 1, complete sequence", 
+      "tamanho": 3760231
+    }, 
+    {
+      "hits": [
+        {
+          "e-value": 0.00101965, 
+          "query-a": "ATCCGCTACATCCACGCCGAGCAATACGT", 
+          "query-b": "|||||||||||||||||||||||||||||", 
+          "query-c": "ATCCGCTACATCCACGCCGAGCAATACGT"
+        }
+      ], 
+      "id": "gi|590114466|emb|HG938370.1|", 
+      "nome": "Burkholderia cenocepacia H111 chromosome 1 complete genome", 
+      "tamanho": 3572953
+    }, 
+    {
+      "hits": [
+        {
+          "e-value": 0.00101965, 
+          "query-a": "ATCCGCTACATCCACGCCGAGCAATACGT", 
+          "query-b": "|||||||||||||||||||||||||||||", 
+          "query-c": "ATCCGCTACATCCACGCCGAGCAATACGT"
+        }
+      ], 
+      "id": "gi|387575654|gb|CP003514.1|", 
+      "nome": "Burkholderia sp. KJ006 chromosome 1, complete sequence", 
+      "tamanho": 3145156
+    }, 
+    {
+      "hits": [
+        {
+          "e-value": 0.00101965, 
+          "query-a": "ATCCGCTACATCCACGCCGAGCAATACGT", 
+          "query-b": "|||||||||||||||||||||||||||||", 
+          "query-c": "ATCCGCTACATCCACGCCGAGCAATACGT"
+        }
+      ], 
+      "id": "gi|190714214|emb|AM747720.1|", 
+      "nome": "Burkholderia cenocepacia J2315 chromosome 1, complete genome", 
+      "tamanho": 3870082
+    }, 
+    {
+      "hits": [
+        {
+          "e-value": 0.00101965, 
+          "query-a": "ATCCGCTACATCCACGCCGAGCAATACGT", 
+          "query-b": "|||||||||||||||||||||||||||||", 
+          "query-c": "ATCCGCTACATCCACGCCGAGCAATACGT"
+        }
+      ], 
+      "id": "gi|171991584|gb|CP001025.1|", 
+      "nome": "Burkholderia ambifaria MC40-6 chromosome 1, complete sequence", 
+      "tamanho": 3443583
+    }, 
+    {
+      "hits": [
+        {
+          "e-value": 0.00101965, 
+          "query-a": "ATCCGCTACATCCACGCCGAGCAATACGT", 
+          "query-b": "|||||||||||||||||||||||||||||", 
+          "query-c": "ATCCGCTACATCCACGCCGAGCAATACGT"
+        }
+      ], 
+      "id": "gi|169814598|gb|CP000958.1|", 
+      "nome": "Burkholderia cenocepacia MC0-3 chromosome 1, complete sequence", 
+      "tamanho": 3532883
+    }
+  ], 
+  "error": 0, 
+  "requested": "43b0c725e05e9a31442f1dd2d41cf21b"
+}
